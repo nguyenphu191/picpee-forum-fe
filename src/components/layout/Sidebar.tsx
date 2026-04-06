@@ -97,13 +97,13 @@ export default function Sidebar() {
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-2xl bg-zinc-900 border border-emerald-500/20 shadow-xl relative overflow-hidden group hover:border-emerald-500/40 transition-all active:scale-[0.98]"
+            className="rounded-2xl bg-white dark:bg-zinc-900 border border-emerald-500/20 shadow-xl relative overflow-hidden group hover:border-emerald-500/40 transition-all active:scale-[0.98]"
           >
             <Link href="/wallet" className="block p-6 relative z-10">
                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-500/20 transition-all" />
                <div className="relative z-10 space-y-4">
                   <div className="flex justify-between items-center">
-                     <span className="text-xs font-black uppercase tracking-widest text-white/90">Số dư hiện tại</span>
+                     <span className="text-xs font-black uppercase tracking-widest text-zinc-700 dark:text-white/90">Số dư hiện tại</span>
                      <div className="p-2 rounded-xl bg-emerald-500/10 group-hover:bg-emerald-500/20 transition-colors">
                         <WalletIcon className="w-6 h-6 text-emerald-500" />
                      </div>
@@ -140,7 +140,7 @@ export default function Sidebar() {
                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Hạng:</span>
                        <span className={`text-[10px] font-black uppercase tracking-widest ${rank.color}`}>{rank.name}</span>
                     </div>
-                    <span className="text-2xl font-black text-zinc-100 tracking-tight">{user.reputation.toLocaleString()} Điểm</span>
+                    <span className="text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">{user.reputation.toLocaleString()} Điểm</span>
                  </div>
               </div>
               
@@ -228,7 +228,7 @@ export default function Sidebar() {
                         className="w-8 h-8 rounded-lg object-cover ring-2 ring-transparent group-hover:ring-emerald-500/30 transition-all"
                       />
                    </div>
-                   <Link href={`/user/${lUser.username}`} className="text-xs font-black text-zinc-300 hover:text-emerald-400 transition-colors">
+                   <Link href={`/user/${lUser.username}`} className="text-xs font-black text-zinc-700 dark:text-zinc-300 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors">
                       {lUser.username}
                    </Link>
                 </div>
@@ -249,7 +249,7 @@ export default function Sidebar() {
          <div className="space-y-4">
             {hotThreads?.map((thread, i) => (
               <Link key={thread.id} href={`/thread/${thread.slug}`} className="group block space-y-1">
-                 <h4 className="text-[11px] font-black leading-tight text-zinc-400 group-hover:text-emerald-400 transition-colors line-clamp-2">
+                 <h4 className="text-[11px] font-black leading-tight text-zinc-600 dark:text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
                    {thread.title}
                  </h4>
                  <div className="flex items-center justify-between text-[9px] font-bold text-zinc-400 uppercase tracking-tighter">

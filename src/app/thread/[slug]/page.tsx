@@ -136,7 +136,7 @@ export default function ThreadPage() {
     if (content.includes('<') && content.includes('>')) {
       return (
         <div 
-          className="prose dark:prose-invert max-w-none text-zinc-200 leading-relaxed text-lg"
+          className="prose dark:prose-invert max-w-none text-zinc-700 dark:text-zinc-200 leading-relaxed text-lg"
           dangerouslySetInnerHTML={{ __html: content }} 
         />
       );
@@ -181,11 +181,11 @@ export default function ThreadPage() {
 
         <div className="space-y-6">
           <div className="space-y-3">
-             <h1 className="text-4xl font-black leading-tight tracking-tight text-zinc-100">{thread.title}</h1>
-             <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400 font-medium">
+             <h1 className="text-4xl font-black leading-tight tracking-tight text-zinc-900 dark:text-zinc-100">{thread.title}</h1>
+             <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400 font-medium">
                 <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {new Date(thread.createdAt).toLocaleDateString('vi-VN')}</span>
                 <span className="flex items-center gap-1.5"><MessageSquare className="w-3.5 h-3.5" /> {thread._count.posts} bình luận</span>
-                <span className="bg-zinc-800 px-2 py-0.5 rounded text-[10px] font-bold uppercase">{thread.views} Lượt xem</span>
+                <span className="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-2 py-0.5 rounded text-[10px] font-bold uppercase">{thread.views} Lượt xem</span>
              </div>
              {thread.tags && thread.tags.length > 0 && (
                <div className="flex flex-wrap items-center gap-2">
@@ -204,13 +204,13 @@ export default function ThreadPage() {
           </div>
 
           {/* AUTHOR & CONTENT */}
-          <div className="rounded-3xl bg-zinc-900 border border-zinc-800 shadow-xl overflow-hidden">
+          <div className="rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden">
              {/* Row 1: Author info */}
-             <div className="flex items-center gap-3 px-6 py-4 border-b border-zinc-800 bg-zinc-900/80">
+             <div className="flex items-center gap-3 px-6 py-4 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/80">
                 <img
                    src={thread.author.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${thread.author.username}`}
                    alt="avatar"
-                   className="w-9 h-9 rounded-xl border border-zinc-700 object-cover shrink-0"
+                   className="w-9 h-9 rounded-xl border border-zinc-200 dark:border-zinc-700 object-cover shrink-0"
                 />
                 <Link href={`/user/${thread.author.username}`} className="font-black text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
                    {thread.author.username}
@@ -226,21 +226,21 @@ export default function ThreadPage() {
 
              {/* Row 2: Content */}
              <div className="px-6 py-6 space-y-4">
-                <div className="prose dark:prose-invert max-w-none text-zinc-200 leading-relaxed text-base whitespace-pre-wrap">
+                <div className="prose dark:prose-invert max-w-none text-zinc-700 dark:text-zinc-200 leading-relaxed text-base whitespace-pre-wrap">
                    {renderContent(thread.content)}
                 </div>
                 {thread.author.signature && (
-                   <p className="text-sm italic text-zinc-500 pt-4 border-t border-zinc-800/60">"{thread.author.signature}"</p>
+                   <p className="text-sm italic text-zinc-500 pt-4 border-t border-zinc-200 dark:border-zinc-800/60">"{thread.author.signature}"</p>
                 )}
              </div>
 
              {/* Row 3: Actions */}
-             <div className="flex items-center gap-2 px-6 py-4 border-t border-zinc-800 bg-zinc-900/60">
+             <div className="flex items-center gap-2 px-6 py-4 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900/60">
                 <motion.button
                    whileHover={{ scale: 1.04 }}
                    whileTap={{ scale: 0.96 }}
                    onClick={() => handleLike({ threadId: thread.id })}
-                   className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${thread._count.likes > 0 ? 'bg-red-500/15 text-red-400 border border-red-500/30' : 'bg-zinc-800 text-zinc-400 border border-zinc-700 hover:border-red-500/30 hover:text-red-400'}`}
+                   className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${thread._count.likes > 0 ? 'bg-red-500/15 text-red-400 border border-red-500/30' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:border-red-500/30 hover:text-red-400'}`}
                 >
                    <Heart className={`w-4 h-4 ${thread._count.likes > 0 ? 'fill-current' : ''}`} />
                    {thread._count.likes} Thích
@@ -250,7 +250,7 @@ export default function ThreadPage() {
                    whileHover={{ scale: 1.04 }}
                    whileTap={{ scale: 0.96 }}
                    title="Lưu bài viết"
-                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-zinc-800 text-zinc-400 border border-zinc-700 hover:text-primary-400 hover:border-primary-500/30 transition-all"
+                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:text-primary-400 hover:border-primary-500/30 transition-all"
                 >
                    <BookMarked className="w-4 h-4" />
                    Lưu
@@ -260,7 +260,7 @@ export default function ThreadPage() {
                    whileHover={{ scale: 1.04 }}
                    whileTap={{ scale: 0.96 }}
                    onClick={() => handleReply(thread.author.username, thread.content)}
-                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-zinc-800 text-zinc-400 border border-zinc-700 hover:text-emerald-400 hover:border-emerald-500/30 transition-all"
+                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:text-emerald-400 hover:border-emerald-500/30 transition-all"
                 >
                    <MessageSquare className="w-4 h-4" />
                    Trả lời
@@ -300,29 +300,29 @@ export default function ThreadPage() {
                      key={post.id}
                      initial={{ opacity: 0, y: 6 }}
                      animate={{ opacity: 1, y: 0 }}
-                     className="rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden"
+                     className="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden"
                   >
                      {/* Row 1: Author */}
-                     <div className="flex items-center gap-3 px-5 py-3 border-b border-zinc-800 bg-zinc-900/80">
-                        <img src={post.author.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${post.author.username}`} className="w-7 h-7 rounded-lg border border-zinc-700 object-cover shrink-0" />
+                     <div className="flex items-center gap-3 px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/80">
+                        <img src={post.author.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${post.author.username}`} className="w-7 h-7 rounded-lg border border-zinc-200 dark:border-zinc-700 object-cover shrink-0" />
                         <Link href={`/user/${post.author.username}`} className="font-black text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
                            {post.author.username}
                         </Link>
                         <span className="text-zinc-600 text-xs">•</span>
                         <span className="text-xs text-zinc-500 font-medium">{new Date(post.createdAt).toLocaleDateString('vi-VN')}</span>
-                        <button className="ml-auto p-1 hover:bg-zinc-800 rounded-lg transition-colors text-zinc-500">
+                        <button className="ml-auto p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors text-zinc-500">
                            <MoreVertical className="w-4 h-4" />
                         </button>
                      </div>
                      {/* Row 2: Content */}
                      <div className="px-5 py-4 space-y-2">
-                        <div className="text-zinc-300 leading-relaxed">{renderContent(post.content)}</div>
+                        <div className="text-zinc-700 dark:text-zinc-300 leading-relaxed">{renderContent(post.content)}</div>
                         {post.author.signature && (
-                           <p className="text-xs italic text-zinc-500 pt-2 border-t border-dashed border-zinc-800">"{post.author.signature}"</p>
+                           <p className="text-xs italic text-zinc-500 pt-2 border-t border-dashed border-zinc-200 dark:border-zinc-800">"{post.author.signature}"</p>
                         )}
                      </div>
                      {/* Row 3: Actions */}
-                     <div className="flex items-center gap-2 px-5 py-3 border-t border-zinc-800 bg-zinc-900/60">
+                     <div className="flex items-center gap-2 px-5 py-3 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900/60">
                         <button
                            onClick={() => handleLike({ postId: post.id })}
                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${post._count.likes > 0 ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'text-zinc-500 hover:text-red-400 hover:bg-red-500/10 border border-transparent'}`}
@@ -364,7 +364,7 @@ export default function ThreadPage() {
                       </div>
                    </div>
                 ) : (
-                   <div className="p-10 rounded-3xl bg-zinc-900 text-center space-y-4 border-2 border-dashed border-zinc-700">
+                   <div className="p-10 rounded-3xl bg-zinc-50 dark:bg-zinc-900 text-center space-y-4 border-2 border-dashed border-zinc-300 dark:border-zinc-700">
                       <p className="font-bold text-zinc-400">Bạn cần đăng nhập để tham gia thảo luận này</p>
                       <Link href="/login" className="inline-block px-8 py-2 rounded-xl bg-primary-500 text-black font-black hover:bg-primary-400 transition-colors">
                          Đăng nhập ngay
@@ -410,7 +410,7 @@ export default function ThreadPage() {
                           {rt.tags.length > 0 && (
                             <div className="flex flex-wrap gap-1 pt-1">
                               {rt.tags.slice(0, 3).map(tag => (
-                                <span key={tag.id} className="px-2 py-0.5 rounded-full text-[9px] font-black bg-zinc-800 text-zinc-400">
+                                <span key={tag.id} className="px-2 py-0.5 rounded-full text-[9px] font-black bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400">
                                   #{tag.name}
                                 </span>
                               ))}

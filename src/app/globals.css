@@ -38,25 +38,24 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  @apply bg-zinc-950 dark:bg-black min-h-screen text-zinc-100 dark:text-zinc-100 antialiased;
+  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply text-zinc-100 dark:text-zinc-100;
+  @apply text-zinc-900 dark:text-zinc-100;
 }
 
 @layer components {
   .forum-card {
-    @apply bg-zinc-900/60 dark:bg-zinc-900/40 border border-zinc-800/60 dark:border-zinc-800/50 shadow-sm transition-all duration-200;
+    @apply bg-white border border-zinc-200 dark:bg-zinc-900/60 dark:border-zinc-800/60 shadow-sm transition-all duration-200;
   }
 
   .glass {
-    @apply bg-black/40 dark:bg-black/60 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-2xl;
+    @apply bg-white/80 border border-zinc-200 backdrop-blur-xl shadow-2xl dark:bg-black/40 dark:border-white/10;
   }
 
   .nav-item {
-    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-black text-sm text-zinc-100 hover:text-emerald-500 hover:bg-emerald-500/5 dark:text-white dark:hover:text-emerald-400 dark:hover:bg-emerald-500/10;
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-black text-sm text-zinc-700 hover:text-emerald-600 hover:bg-emerald-500/5 dark:text-zinc-100 dark:hover:text-emerald-400 dark:hover:bg-emerald-500/10;
   }
 }
 
@@ -102,7 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .prose h1, .prose h2, .prose h3 {
   font-family: var(--font-heading) !important;
-  color: white !important;
+  color: inherit !important;
   margin-top: 2rem !important;
   margin-bottom: 1rem !important;
 }

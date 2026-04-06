@@ -18,10 +18,10 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-zinc-200 dark:border-zinc-800">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
+      <div className="max-w-360 mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
         {/* LOGO */}
-        <div className="flex items-center gap-4 flex-shrink-0">
-          <Link href="/" className="text-2xl font-black bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent tracking-tighter">
+        <div className="flex items-center gap-4 shrink-0">
+          <Link href="/" className="text-2xl font-black bg-linear-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent tracking-tighter">
             PICPEE FORUM
           </Link>
         </div>
@@ -43,7 +43,7 @@ export default function Navbar() {
           {user && (
             <>
               <NotificationDropdown />
-              <div className="hidden sm:block h-6 w-[1px] bg-zinc-200 dark:bg-zinc-800 mx-1" />
+              <div className="hidden sm:block h-6 w-px bg-zinc-200 dark:bg-zinc-800 mx-1" />
             </>
           )}
 
@@ -68,7 +68,7 @@ export default function Navbar() {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-sm font-black text-zinc-100">{user.username}</span>
+                    <span className="text-sm font-black text-zinc-900 dark:text-zinc-100">{user.username}</span>
                     <span className="text-[10px] font-bold text-emerald-500 leading-none">Uy tín: {user.reputation}</span>
                   </div>
                 </Link>

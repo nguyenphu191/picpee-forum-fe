@@ -35,16 +35,16 @@ export default function RegisterPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md p-8 rounded-3xl bg-zinc-900 border border-zinc-800 shadow-2xl shadow-black/50 space-y-8"
+        className="w-full max-w-md p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl shadow-black/10 dark:shadow-black/50 space-y-8"
       >
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-black tracking-tight text-zinc-100">Tạo tài khoản mới</h1>
-          <p className="text-zinc-400 font-medium">Tham gia cộng đồng Picpee và bắt đầu kiếm tiền.</p>
+          <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100">Tạo tài khoản mới</h1>
+          <p className="text-zinc-500 dark:text-zinc-400 font-medium">Tham gia cộng đồng Picpee và bắt đầu kiếm tiền.</p>
         </div>
 
         <form onSubmit={handleRegister} className="space-y-5">
           <div className="space-y-2">
-            <label className="text-sm font-bold text-zinc-300 ml-1">Tên người dùng</label>
+            <label className="text-sm font-bold text-zinc-700 dark:text-zinc-300 ml-1">Tên người dùng</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <User className="w-5 h-5 text-zinc-400" />
@@ -60,7 +60,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-bold text-zinc-300 ml-1">Email</label>
+            <label className="text-sm font-bold text-zinc-700 dark:text-zinc-300 ml-1">Email</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Mail className="w-5 h-5 text-zinc-400" />
@@ -77,7 +77,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-bold text-zinc-300 ml-1">Mật khẩu</label>
+            <label className="text-sm font-bold text-zinc-700 dark:text-zinc-300 ml-1">Mật khẩu</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Lock className="w-5 h-5 text-zinc-400" />

@@ -33,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" suppressHydrationWarning className={`${inter.variable} ${plusJakarta.variable}`}>
-      <body className="min-h-screen bg-zinc-950 dark:bg-black transition-colors duration-300 emerald-glow font-sans">
+      <body className="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 emerald-glow font-sans">
         <Providers>
           <Navbar />
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16">

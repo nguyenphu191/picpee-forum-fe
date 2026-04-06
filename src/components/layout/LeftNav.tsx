@@ -66,7 +66,7 @@ export default function LeftNav() {
       </div>
 
       {/* Account Section */}
-      <div className="mt-auto space-y-1 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+      <div className="mt-auto space-y-1 pt-6 border-t border-zinc-200 dark:border-zinc-700">
         {user ? (
           <>
             {user.role === 'ADMIN' && (

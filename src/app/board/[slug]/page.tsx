@@ -55,14 +55,14 @@ export default function BoardPage() {
 
   return (
     <div className="lg:col-span-12 space-y-8">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-zinc-800">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-zinc-200 dark:border-zinc-800">
         <div className="space-y-4">
           <Link href="/" className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-emerald-500 font-medium transition-colors">
             <ArrowLeft className="w-4 h-4" /> Quay lại diễn đàn
           </Link>
           <div className="space-y-2">
             <span className="text-xs font-black uppercase tracking-widest text-emerald-500">{board.category.name}</span>
-            <h1 className="text-4xl font-black tracking-tight text-zinc-100">{board.name}</h1>
+            <h1 className="text-4xl font-black tracking-tight text-zinc-900 dark:text-zinc-100">{board.name}</h1>
             <p className="text-zinc-400 text-lg max-w-2xl">{board.description}</p>
           </div>
         </div>
@@ -78,22 +78,22 @@ export default function BoardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="md:col-span-3 space-y-4">
-          <div className="flex items-center justify-between bg-zinc-900 border border-zinc-800 p-3 rounded-2xl">
+          <div className="flex items-center justify-between bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-3 rounded-2xl">
             <div className="flex gap-2">
-              <button className="text-sm font-bold text-emerald-500 bg-zinc-800 px-4 py-1.5 rounded-xl">Mới nhất</button>
+              <button className="text-sm font-bold text-emerald-600 dark:text-emerald-500 bg-zinc-100 dark:bg-zinc-800 px-4 py-1.5 rounded-xl">Mới nhất</button>
               <button className="text-sm font-bold text-zinc-500 hover:text-emerald-500 px-4 py-1.5 transition-colors">Yêu thích</button>
             </div>
             <div className="flex gap-2">
-              <button className="p-2 rounded-xl border border-zinc-700 hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"><Filter className="w-4 h-4" /></button>
-              <button className="p-2 rounded-xl border border-zinc-700 hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"><Search className="w-4 h-4" /></button>
+              <button className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-zinc-500 dark:text-zinc-400"><Filter className="w-4 h-4" /></button>
+              <button className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-zinc-500 dark:text-zinc-400"><Search className="w-4 h-4" /></button>
             </div>
           </div>
 
-          <div className="bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden shadow-sm">
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm">
             {board.threads.length === 0 ? (
               <div className="p-20 text-center text-zinc-500 font-medium">Chưa có bài viết nào trong khu vực này.</div>
             ) : (
-              <div className="divide-y divide-zinc-800">
+              <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
                 {board.threads.map((thread) => (
                   <div
                     key={thread.id}
@@ -101,17 +101,17 @@ export default function BoardPage() {
                     className="cursor-pointer"
                   >
                     <motion.div
-                      className="p-6 flex items-center gap-6 group transition-colors hover:bg-zinc-800/40"
+                      className="p-6 flex items-center gap-6 group transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
                     >
-                      <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:bg-emerald-500/10 transition-colors">
+                      <div className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0 group-hover:bg-emerald-500/10 transition-colors">
                         <MessageSquare className="w-6 h-6 text-zinc-500 group-hover:text-emerald-500 transition-colors" />
                       </div>
 
                       <div className="flex-1 space-y-1.5">
                         <div className="flex items-center gap-2">
-                          <h3 className="text-base font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors line-clamp-1">{thread.title}</h3>
-                          {thread.isPinned && <span className="px-2 py-0.5 rounded-md bg-yellow-400/10 text-yellow-500 text-[10px] font-black uppercase">Ghim</span>}
-                          {thread.isLocked && <span className="px-2 py-0.5 rounded-md bg-zinc-700 text-zinc-400 text-[10px] font-black uppercase">Khóa</span>}
+                          <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">{thread.title}</h3>
+                          {thread.isPinned && <span className="px-2 py-0.5 rounded-md bg-yellow-400/10 text-yellow-600 dark:text-yellow-500 text-[10px] font-black uppercase">Ghim</span>}
+                          {thread.isLocked && <span className="px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400 text-[10px] font-black uppercase">Khóa</span>}
                         </div>
                         <div className="flex items-center gap-4 text-sm text-zinc-500 font-medium">
                           <Link href={`/user/${thread.author.username}`} onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors relative z-10">
@@ -122,7 +122,7 @@ export default function BoardPage() {
                       </div>
 
                       <div className="text-right hidden sm:block">
-                        <span className="block text-lg font-black text-zinc-100">{thread._count.posts}</span>
+                        <span className="block text-lg font-black text-zinc-900 dark:text-zinc-100">{thread._count.posts}</span>
                         <span className="text-xs text-zinc-500 font-bold uppercase tracking-tighter">Bình luận</span>
                       </div>
                     </motion.div>
@@ -144,7 +144,7 @@ export default function BoardPage() {
                     className={`w-10 h-10 flex items-center justify-center rounded-xl font-bold transition-all ${
                       isActive
                         ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/30 scale-110'
-                        : 'bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-zinc-700'
+                        : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700'
                     }`}
                   >
                     {pageNum}
