@@ -8,6 +8,7 @@ import { Mail, Lock, LogIn, Github, AtSign, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 import api from '@/lib/api';
 import { useAuthStore } from '@/store/authStore';
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const fetchMe = useAuthStore((state) => state.fetchMe);
+  const { loginWith } = useFirebaseAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,10 +110,18 @@ export default function LoginPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          <button className="flex items-center justify-center gap-2 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all text-sm font-semibold text-zinc-700 dark:text-zinc-200">
+          <button
+            type="button"
+            onClick={() => loginWith('github')}
+            className="flex items-center justify-center gap-2 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all text-sm font-semibold text-zinc-700 dark:text-zinc-200"
+          >
             <Github className="w-4 h-4" /> Github
           </button>
-          <button className="flex items-center justify-center gap-2 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all text-sm font-semibold text-zinc-700 dark:text-zinc-200">
+          <button
+            type="button"
+            onClick={() => loginWith('google')}
+            className="flex items-center justify-center gap-2 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all text-sm font-semibold text-zinc-700 dark:text-zinc-200"
+          >
             <AtSign className="w-4 h-4" /> Google
           </button>
         </div>

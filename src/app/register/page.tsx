@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Mail, Lock, UserPlus, User, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, UserPlus, User, Eye, EyeOff, Github, AtSign } from 'lucide-react';
 import { toast } from 'sonner';
 import api from '@/lib/api';
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { loginWith } = useFirebaseAuth();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,6 +118,30 @@ export default function RegisterPage() {
         </form>
 
         <div className="space-y-4">
+          <div className="relative my-2">
+            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-zinc-200 dark:border-zinc-700" /></div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white dark:bg-zinc-900 px-3 text-zinc-500 font-medium tracking-wider">Hoặc đăng ký với</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onClick={() => loginWith('github')}
+              className="flex items-center justify-center gap-2 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all text-sm font-semibold text-zinc-700 dark:text-zinc-200"
+            >
+              <Github className="w-4 h-4" /> Github
+            </button>
+            <button
+              type="button"
+              onClick={() => loginWith('google')}
+              className="flex items-center justify-center gap-2 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all text-sm font-semibold text-zinc-700 dark:text-zinc-200"
+            >
+              <AtSign className="w-4 h-4" /> Google
+            </button>
+          </div>
+
           <p className="text-center text-xs text-zinc-500 font-medium leading-relaxed">
             Bằng cách đăng ký, bạn đồng ý với <Link href="/terms" className="text-emerald-500 hover:text-emerald-400 hover:underline font-bold">Điều khoản dịch vụ</Link> của chúng tôi.
           </p>

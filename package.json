@@ -25,6 +25,7 @@
     "axios": "^1.13.6",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "firebase": "^12.11.0",
     "framer-motion": "^12.35.2",
     "lodash.throttle": "^4.1.1",
     "lowlight": "^3.3.0",
