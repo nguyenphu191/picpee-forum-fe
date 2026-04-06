@@ -68,7 +68,29 @@ export default function ThreadPage() {
   const { user } = useAuthStore();
   const [comment, setComment] = useState('');
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  
+
+  const { data: bookmarkStatus, refetch: refetchBookmark } = useQuery<{ bookmarked: boolean }>({
+    queryKey: ['bookmark', slug],
+    queryFn: async () => {
+      if (!thread) return { bookmarked: false };
+      const { data } = await api.get(`/forum/bookmarks/check/${thread.id}`);
+      return data;
+    },
+    enabled: !!thread && !!user,
+  });
+
+  const bookmarkMutation = useMutation({
+    mutationFn: async (threadId: string) => {
+      const { data } = await api.post('/forum/bookmarks/toggle', { threadId });
+      return data;
+    },
+    onSuccess: (data) => {
+      toast.success(data.bookmarked ? 'Đã lưu bài viết' : 'Đã bỏ lưu bài viết');
+      refetchBookmark();
+    },
+    onError: () => toast.error('Vui lòng đăng nhập để lưu bài viết'),
+  });
+
   const { data: thread, isLoading } = useQuery<ThreadData>({
     queryKey: ['thread', slug],
     queryFn: async () => {
@@ -250,10 +272,14 @@ export default function ThreadPage() {
                    whileHover={{ scale: 1.04 }}
                    whileTap={{ scale: 0.96 }}
                    title="Lưu bài viết"
-                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:text-primary-400 hover:border-primary-500/30 transition-all"
+                   onClick={() => {
+                     if (!user) { toast.error('Vui lòng đăng nhập để lưu bài viết'); return; }
+                     bookmarkMutation.mutate(thread.id);
+                   }}
+                   className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold border transition-all ${bookmarkStatus?.bookmarked ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/30' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:text-emerald-500 hover:border-emerald-500/30'}`}
                 >
-                   <BookMarked className="w-4 h-4" />
-                   Lưu
+                   <BookMarked className={`w-4 h-4 ${bookmarkStatus?.bookmarked ? 'fill-current' : ''}`} />
+                   {bookmarkStatus?.bookmarked ? 'Đã lưu' : 'Lưu'}
                 </motion.button>
 
                 <motion.button

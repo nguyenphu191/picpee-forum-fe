@@ -13,7 +13,8 @@ import {
   ChevronRight,
   LayoutDashboard,
   Wallet,
-  FileText
+  FileText,
+  Bookmark
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
@@ -77,6 +78,12 @@ export default function LeftNav() {
                 </div>
               </Link>
             )}
+            <Link href="/bookmarks">
+              <div className={`nav-item ${isActive('/bookmarks') ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' : ''}`}>
+                <Bookmark className="w-4 h-4" />
+                <span>Bài viết đã lưu</span>
+              </div>
+            </Link>
             <Link href="/my-threads">
               <div className={`nav-item ${isActive('/my-threads') ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' : ''}`}>
                 <FileText className="w-4 h-4" />

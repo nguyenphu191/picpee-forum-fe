@@ -37,7 +37,7 @@ export default function TrendingPage() {
            <TrendingUp className="w-6 h-6" />
         </div>
         <div>
-          <h1 className="text-2xl font-black text-zinc-100 font-heading">Chủ đề Xu hướng</h1>
+          <h1 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 font-heading">Chủ đề Xu hướng</h1>
           <p className="text-zinc-500 text-sm font-medium">Bắt kịp những thảo luận nóng nhất trong cộng đồng</p>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function TrendingPage() {
             >
               <Link href={`/thread/${thread.slug}`}>
                 <div className="group p-5 forum-card rounded-2xl flex items-center gap-4 sm:gap-6 hover:border-emerald-500/30">
-                  <div className="hidden sm:flex flex-col items-center justify-center w-12 text-zinc-300 font-black text-xl italic group-hover:text-emerald-500 transition-colors">
+                  <div className="hidden sm:flex flex-col items-center justify-center w-12 text-zinc-400 dark:text-zinc-300 font-black text-xl italic group-hover:text-emerald-500 transition-colors">
                     {i + 1}
                   </div>
                   
@@ -70,7 +70,7 @@ export default function TrendingPage() {
                         • {formatDistanceToNow(new Date(thread.createdAt), { addSuffix: true, locale: vi })}
                       </span>
                     </div>
-                    <h2 className="text-sm sm:text-base font-black text-zinc-200 group-hover:text-emerald-600 transition-colors line-clamp-1">
+                    <h2 className="text-sm sm:text-base font-black text-zinc-900 dark:text-zinc-200 group-hover:text-emerald-600 transition-colors line-clamp-1">
                       {thread.title}
                     </h2>
                     <div className="flex items-center gap-4 mt-2">
