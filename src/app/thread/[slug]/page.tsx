@@ -69,28 +69,6 @@ export default function ThreadPage() {
   const [comment, setComment] = useState('');
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const { data: bookmarkStatus, refetch: refetchBookmark } = useQuery<{ bookmarked: boolean }>({
-    queryKey: ['bookmark', slug],
-    queryFn: async () => {
-      if (!thread) return { bookmarked: false };
-      const { data } = await api.get(`/forum/bookmarks/check/${thread.id}`);
-      return data;
-    },
-    enabled: !!thread && !!user,
-  });
-
-  const bookmarkMutation = useMutation({
-    mutationFn: async (threadId: string) => {
-      const { data } = await api.post('/forum/bookmarks/toggle', { threadId });
-      return data;
-    },
-    onSuccess: (data) => {
-      toast.success(data.bookmarked ? 'Đã lưu bài viết' : 'Đã bỏ lưu bài viết');
-      refetchBookmark();
-    },
-    onError: () => toast.error('Vui lòng đăng nhập để lưu bài viết'),
-  });
-
   const { data: thread, isLoading } = useQuery<ThreadData>({
     queryKey: ['thread', slug],
     queryFn: async () => {
@@ -128,6 +106,27 @@ export default function ThreadPage() {
     }
     likeMutation.mutate(id);
   };
+
+  const { data: bookmarkStatus, refetch: refetchBookmark } = useQuery<{ bookmarked: boolean }>({
+    queryKey: ['bookmark', thread?.id],
+    queryFn: async () => {
+      const { data } = await api.get(`/forum/bookmarks/check/${thread!.id}`);
+      return data;
+    },
+    enabled: !!thread && !!user,
+  });
+
+  const bookmarkMutation = useMutation({
+    mutationFn: async (threadId: string) => {
+      const { data } = await api.post('/forum/bookmarks/toggle', { threadId });
+      return data;
+    },
+    onSuccess: (data) => {
+      toast.success(data.bookmarked ? 'Đã lưu bài viết' : 'Đã bỏ lưu bài viết');
+      refetchBookmark();
+    },
+    onError: () => toast.error('Vui lòng đăng nhập để lưu bài viết'),
+  });
 
   const commentMutation = useMutation({
     mutationFn: async (content: string) => {

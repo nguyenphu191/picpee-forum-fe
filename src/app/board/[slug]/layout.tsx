@@ -4,13 +4,14 @@ import axios from 'axios';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const { slug } = await params;
   const previousImages = (await parent).openGraph?.images || [];
   try {
-    const { data: board } = await axios.get(`${API_URL}/forum/boards/${params.slug}`);
+    const { data: board } = await axios.get(`${API_URL}/forum/boards/${slug}`);
 
     if (!board) {
       return { title: 'Chuyên mục không tồn tại' };

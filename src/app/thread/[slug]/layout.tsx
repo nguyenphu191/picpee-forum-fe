@@ -5,13 +5,14 @@ import axios from 'axios';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 // Generate Dynamic Metadata for SEO & Social Previews
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const { data: thread } = await axios.get(`${API_URL}/forum/threads/${params.slug}`);
+    const { data: thread } = await axios.get(`${API_URL}/forum/threads/${slug}`);
 
     if (!thread) {
       return { title: 'Bài viết không tồn tại' };
