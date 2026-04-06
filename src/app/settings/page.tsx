@@ -14,6 +14,7 @@ export default function SettingsPage() {
   const { user, isLoading, fetchMe } = useAuthStore();
   const router = useRouter();
   
+  const [username, setUsername] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [signature, setSignature] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +26,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (user) {
+      setUsername(user.username || '');
       setAvatarUrl(user.avatarUrl || '');
       setSignature(user.signature || '');
       setPhoneNumber(user.phoneNumber || '');
@@ -55,6 +57,7 @@ export default function SettingsPage() {
 
   const handleUpdate = () => {
     const data: any = {};
+    if (username !== user.username) data.username = username;
     if (avatarUrl !== user.avatarUrl) data.avatarUrl = avatarUrl;
     if (signature !== user.signature) data.signature = signature;
     if (password) data.password = password;
@@ -133,6 +136,20 @@ export default function SettingsPage() {
 
               <div className="flex-1 space-y-8 w-full">
                  <div className="space-y-6">
+                    <div>
+                      <label className="flex items-center gap-2 text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-2">
+                        <User className="w-4 h-4 text-primary-500" /> Tên người dùng
+                      </label>
+                      <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Tên người dùng (chữ cái, số, gạch dưới)"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700 outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all text-sm"
+                      />
+                      <p className="text-xs text-zinc-400 mt-1.5">Chỉ dùng chữ cái, số và dấu gạch dưới (_). Tối thiểu 3 ký tự.</p>
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                            <label className="flex items-center gap-2 text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-2">
