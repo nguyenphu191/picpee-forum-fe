@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 export function useFirebaseAuth() {
-  const { fetchMe } = useAuthStore();
+  const { setUser } = useAuthStore();
   const router = useRouter();
 
   const loginWith = async (provider: 'google' | 'github') => {
@@ -17,8 +17,8 @@ export function useFirebaseAuth() {
       const result = await signInWithPopup(auth, p);
       const idToken = await result.user.getIdToken();
 
-      await api.post('/auth/firebase', { idToken });
-      await fetchMe();
+      const { data } = await api.post('/auth/firebase', { idToken });
+      setUser(data);
       toast.success('Đăng nhập thành công!');
       router.push('/');
     } catch (err: any) {

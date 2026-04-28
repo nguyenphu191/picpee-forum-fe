@@ -18,7 +18,7 @@ interface User {
 interface AuthState {
   user: User | null;
   isLoading: boolean;
-  setUser: (user: User | null) => void;
+  setUser: (user: (User & { accessToken?: string }) | null) => void;
   fetchMe: () => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -26,19 +26,39 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isLoading: true,
-  setUser: (user) => set({ user, isLoading: false }),
+  setUser: (userData) => {
+    if (userData) {
+      const { accessToken, ...user } = userData;
+      if (accessToken && typeof window !== 'undefined') {
+        localStorage.setItem('picpee-token', accessToken);
+      }
+      set({ user, isLoading: false });
+    } else {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('picpee-token');
+      }
+      set({ user: null, isLoading: false });
+    }
+  },
   fetchMe: async () => {
+    if (typeof window !== 'undefined' && !localStorage.getItem('picpee-token')) {
+      set({ user: null, isLoading: false });
+      return;
+    }
     try {
       const { data } = await api.get('/auth/me');
       set({ user: data, isLoading: false });
-    } catch (error) {
+    } catch {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('picpee-token');
+      }
       set({ user: null, isLoading: false });
     }
   },
   logout: async () => {
-    try {
-      await api.post('/auth/logout');
-      set({ user: null });
-    } catch (error) {}
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('picpee-token');
+    }
+    set({ user: null });
   },
 }));
