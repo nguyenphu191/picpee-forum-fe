@@ -100,7 +100,7 @@ export default function AdminTagsPage() {
         </div>
         <button
           onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-xl font-bold hover:bg-primary-600 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-black rounded-xl font-bold hover:bg-primary-600 transition-colors"
         >
           <Plus className="w-4 h-4" /> Thêm Tag Mới
         </button>
