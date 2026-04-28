@@ -16,16 +16,16 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const fetchMe = useAuthStore((state) => state.fetchMe);
+  const setUser = useAuthStore((state) => state.setUser);
   const { loginWith } = useFirebaseAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('/auth/login', { email, password });
+      const { data } = await api.post('/auth/login', { email, password });
+      setUser(data);
       toast.success('Đăng nhập thành công!');
-      await fetchMe();
       router.push('/');
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Đăng nhập thất bại');
